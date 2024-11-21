@@ -1,7 +1,7 @@
 QUIQQER Multi Mailer
 ========
 
-![QUIQQER Areas](bin/images/Readme.jpg)
+![QUIQQER Multi Mailer](bin/images/Readme.png)
 
 Multi Mailer - Reliable mail delivery system with automatic failover
 

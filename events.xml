@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<events xmlns="https://doc.quiqqer.com/xml/quiqqer-quiqqer-events.xsd">
+    <event on="onGetPhpMailerInitStart"
+           fire="\QUI\MultiMailer\EventHandler::onGetPhpMailerInitStart"
+    />
+</events>

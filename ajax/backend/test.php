@@ -12,53 +12,7 @@ QUI::$Ajax->registerFunction(
         $serverData = json_decode($serverData, true);
 
         try {
-            $mail = QUI::getMailManager()->getPHPMailer();
-            $mail->isSMTP();
-
-            if (!empty($serverData['server'])) {
-                $mail->Host = $serverData['server'];
-            }
-
-            if (!empty($serverData['port'])) {
-                $mail->Port = $serverData['port'];
-            }
-
-            if (!empty($serverData['auth'])) {
-                $mail->SMTPAuth = true;
-
-                if (!empty($serverData['username'])) {
-                    $mail->Username = $serverData['username'];
-                }
-
-                if (!empty($serverData['password'])) {
-                    $mail->Username = $serverData['password'];
-                }
-            }
-
-            if (!empty($serverData['security'])) {
-                switch ($serverData['security']) {
-                    case 'ssl':
-                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-                        break;
-
-                    case 'tls':
-                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                        break;
-                }
-            }
-
-            // test mail
-            if (!empty($serverData['MAILFrom'])) {
-                if (!empty($serverData['MAILFromText'])) {
-                    $mail->setFrom($serverData['MAILFrom'], $serverData['MAILFromText']);
-                } else {
-                    $mail->setFrom($serverData['MAILFrom'], '');
-                }
-            }
-
-            if (!empty($serverData['MAILReplyTo'])) {
-                $mail->addReplyTo($serverData['MAILReplyTo']);
-            }
+            $mail = QUI\MultiMailer\Mailer::parseMailServerDataToPhpMailer($serverData);
 
             $adminMails = QUI::conf('mail', 'admin_mail');
             $adminMails = explode(',', $adminMails);

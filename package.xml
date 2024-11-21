@@ -1,0 +1,26 @@
+<quiqqer>
+    <package>
+        <title>
+            <locale group="quiqqer/multi-mailer" var="package.title"/>
+        </title>
+
+        <description>
+            <locale group="quiqqer/multi-mailer" var="package.description"/>
+        </description>
+
+        <image src="URL_OPT_DIR/quiqqer/multi-mailer/bin/images/Logo.jpg"/>
+
+        <support>
+            <email><![CDATA[support@pcsg.de]]></email>
+            <forum><![CDATA[https://community.quiqqer.com]]></forum>
+            <source><![CDATA[https://dev.quiqqer.com/quiqqer/multi-mailer]]></source>
+            <issues><![CDATA[https://dev.quiqqer.com/quiqqer/multi-mailer/issues]]></issues>
+            <wiki><![CDATA[https://dev.quiqqer.com/quiqqer/multi-mailer/wikis/home]]></wiki>
+        </support>
+
+        <copyright>
+            <name><![CDATA[PCSG - Computer & Internet Service OHG]]></name>
+            <license><![CDATA[GPL-3.0+]]></license>
+        </copyright>
+    </package>
+</quiqqer>

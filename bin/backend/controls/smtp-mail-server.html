@@ -1,0 +1,138 @@
+<form autocomplete="off">
+    <table class="data-table data-table-flexbox">
+        <thead>
+        <tr>
+            <th>
+                SMTP-Server Einstellungen
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <div class="field-container-item">SMTP Server</div>
+                    <input type="text"
+                           name="server"
+                           class="field-container-field"
+                    />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <div class="field-container-item">SMTP Port</div>
+                    <input type="number"
+                           name="port"
+                           class="field-container-field"
+                    />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <div class="field-container-item">SMTP Debug Level</div>
+                    <input type="number"
+                           name="debug"
+                           class="field-container-field"
+                           placeholder="0"
+                    />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <div class="field-container-item">Verbindungssicherheit</div>
+                    <select name="security" class="field-container-field">
+                        <option value="">---</option>
+                        <option value="ssl">SSL</option>
+                        <option value="tls">TLS</option>
+                    </select>
+                </label>
+            </td>
+        </tr>
+        <tr class="ssl-option-row even" style="float: left; height: 36px; overflow: hidden; position: relative;">
+            <td>
+                <p>
+                    <label class="checkbox-label hasCheckbox">
+                        <input type="checkbox" name="secureSSL_verify_peer"/>
+                        Verifizierung des verwendeten SSL-Zertifikats voraussetzen.
+                    </label>
+                </p>
+            </td>
+        </tr>
+        <tr class="ssl-option-row odd" style="float: left; height: 36px; overflow: hidden; position: relative;">
+            <td>
+                <p>
+                    <label class="checkbox-label hasCheckbox">
+                        <input type="checkbox" name="secureSSL_verify_peer_name">
+                        Erfordere die Verfikation des Peernamens.
+                    </label>
+                </p>
+            </td>
+        </tr>
+        <tr class="ssl-option-row even" style="float: left; height: 36px; overflow: hidden; position: relative;">
+            <td>
+                <p>
+                    <label class="checkbox-label hasCheckbox">
+                        <input type="checkbox" name="secureSSL_allow_self_signed">
+                        Selbst signierte Zerifikate erlauben.
+                    </label>
+                </p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="data-table data-table-flexbox">
+        <thead>
+        <tr>
+            <th>
+                SMTP-Server Einstellungen
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <label class="field-container hasCheckbox">
+                    <div class="field-container-item">SMTP Authentifizierung aktivieren?</div>
+                    <div class="field-container-field">
+                        <input type="checkbox"
+                               name="auth"
+                               class="field-container-field"
+                        />
+                    </div>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <div class="field-container-item">SMTP Benutzer</div>
+                    <input type="text"
+                           name="username"
+                           class="field-container-field"
+                           autocomplete="new-password"
+                    />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <div class="field-container-item">SMTP Passwort</div>
+                    <input type="password"
+                           name="password"
+                           class="field-container-field"
+                           autocomplete="new-password"
+                    />
+                </label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>

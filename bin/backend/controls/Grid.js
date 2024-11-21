@@ -29,7 +29,8 @@ define('package/quiqqer/multi-mailer/bin/backend/controls/Grid', [
 
             '$onImport',
             '$onGridClick',
-            '$onGridDblClick'
+            '$onGridDblClick',
+            '$test'
         ],
 
         initialize: function() {
@@ -69,43 +70,57 @@ define('package/quiqqer/multi-mailer/bin/backend/controls/Grid', [
                 ],
                 columnModel: [
                     {
-                        header: 'Server',
+                        header: QUILocale.get(lg, 'template.textSmtpSettingsServer'),
                         dataIndex: 'server',
                         dataType: 'string',
                         width: 200
                     }, {
-                        header: 'Port',
+                        header: QUILocale.get(lg, 'template.textSmtpSettingsPort'),
                         dataIndex: 'port',
                         dataType: 'string',
-                        width: 100
+                        width: 50
                     }, {
-                        header: 'Verbindungssicherheit',
+                        header: QUILocale.get(lg, 'template.textSmtpSettingsSecurity'),
+                        title: QUILocale.get(lg, 'template.textSmtpSettingsSecurity'),
                         dataIndex: 'security',
                         dataType: 'string',
-                        width: 100
+                        width: 50
                     }, {
-                        header: 'Auth',
+                        header: QUILocale.get(lg, 'template.mailFrom'),
+                        title: QUILocale.get(lg, 'template.mailFrom'),
+                        dataIndex: 'MAILFrom',
+                        dataType: 'string',
+                        width: 200
+                    }, {
+                        header: QUILocale.get(lg, 'template.textAuth'),
+                        title: QUILocale.get(lg, 'template.textAuth'),
                         dataIndex: 'display_auth',
                         dataType: 'node',
                         width: 50
                     }, {
-                        header: 'Verifizierung des verwendeten SSL-Zertifikats voraussetzen',
-                        title: 'Verifizierung des verwendeten SSL-Zertifikats voraussetzen',
+                        header: QUILocale.get(lg, 'template.textSmtpSettingsSecureSSL_verify_peer'),
+                        title: QUILocale.get(lg, 'template.textSmtpSettingsSecureSSL_verify_peer'),
                         dataIndex: 'display_secureSSL_verify_peer',
                         dataType: 'node',
                         width: 50
                     }, {
-                        header: 'Erfordere die Verfikation des Peernamens',
-                        title: 'Erfordere die Verfikation des Peernamens',
+                        header: QUILocale.get(lg, 'template.textSmtpSettingsSecureSSL_verify_peer_name'),
+                        title: QUILocale.get(lg, 'template.textSmtpSettingsSecureSSL_verify_peer_name'),
                         dataIndex: 'display_secureSSL_verify_peer_name',
                         dataType: 'node',
                         width: 50
                     }, {
-                        header: 'Selbst signierte Zerifikate erlauben',
-                        title: ' Selbst signierte Zerifikate erlauben',
+                        header: QUILocale.get(lg, 'template.textSmtpSettingsSecureSSL_allow_self_signed'),
+                        title: QUILocale.get(lg, 'template.textSmtpSettingsSecureSSL_allow_self_signed'),
                         dataIndex: 'display_secureSSL_allow_self_signed',
                         dataType: 'node',
                         width: 50
+                    }, {
+                        hidden: true,
+                        dataIndex: 'MAILFromText'
+                    }, {
+                        hidden: true,
+                        dataIndex: 'MAILReplyTo'
                     }, {
                         hidden: true,
                         dataIndex: 'auth'
@@ -170,7 +185,6 @@ define('package/quiqqer/multi-mailer/bin/backend/controls/Grid', [
                         });
                     });
 
-
                     this.$Grid.setData({
                         data: servers
                     });
@@ -188,7 +202,7 @@ define('package/quiqqer/multi-mailer/bin/backend/controls/Grid', [
             this.$Grid.showLoader();
 
             return new Promise((resolve, reject) => {
-                QUIAjax.get('package_quiqqer_multi-mailer_ajax_backend_update', resolve, {
+                QUIAjax.post('package_quiqqer_multi-mailer_ajax_backend_update', resolve, {
                     package: 'quiqqer/multi-mailer',
                     servers: JSON.encode(this.$Grid.getData()),
                     onError: reject
@@ -203,30 +217,49 @@ define('package/quiqqer/multi-mailer/bin/backend/controls/Grid', [
         addMailServer: function() {
             new QUIConfirm({
                 title: QUILocale.get(lg, 'window.addMailServer.title'),
-                maxHeight: 800,
+                maxHeight: 950,
                 maxWidth: 600,
                 events: {
                     onOpen: (Win) => {
                         Win.Loader.show();
-                        Win.getContent().set('html', Mustache.render(templateServer, {}));
+                        Win.getContent().set('html', Mustache.render(templateServer, {
+                            textMailSettings: QUILocale.get(lg, 'template.mailSettings'),
+                            textMailFrom: QUILocale.get(lg, 'template.mailFrom'),
+                            textMailFromText: QUILocale.get(lg, 'template.mailFromText'),
+                            textMailReplyTo: QUILocale.get(lg, 'template.mailReplyTo'),
+                            textSmtpSettings: QUILocale.get(lg, 'template.textSmtpSettings'),
+                            textSmtpSettingsServer: QUILocale.get(lg, 'template.textSmtpSettingsServer'),
+                            textSmtpSettingsPort: QUILocale.get(lg, 'template.textSmtpSettingsPort'),
+                            textSmtpSettingsDebug: QUILocale.get(lg, 'template.textSmtpSettingsDebug'),
+                            textSmtpSettingsSecurity: QUILocale.get(lg, 'template.textSmtpSettingsSecurity'),
+                            textSmtpSettingsSecuritySSL: QUILocale.get(lg, 'template.textSmtpSettingsSecuritySSL'),
+                            textSmtpSettingsSecurityTLS: QUILocale.get(lg, 'template.textSmtpSettingsSecurityTLS'),
+                            textSmtpSettingsSecureSSL_verify_peer: QUILocale.get(
+                                lg,
+                                'template.textSmtpSettingsSecureSSL_verify_peer'
+                            ),
+                            textSmtpSettingsSecureSSL_verify_peer_name: QUILocale.get(
+                                lg,
+                                'template.textSmtpSettingsSecureSSL_verify_peer_name'
+                            ),
+                            textSmtpSettingsSecureSSL_allow_self_signed: QUILocale.get(
+                                lg,
+                                'template.textSmtpSettingsSecureSSL_allow_self_signed'
+                            ),
+                            textAuth: QUILocale.get(lg, 'template.textAuth'),
+                            textAuthActivate: QUILocale.get(lg, 'template.textAuthActivate'),
+                            textAuthUsername: QUILocale.get(lg, 'template.textAuthUsername'),
+                            textAuthPassword: QUILocale.get(lg, 'template.textAuthPassword'),
+                            textTestButton: QUILocale.get(lg, 'template.textTestButton')
+                        }));
+
+                        Win.getContent().querySelector('[name="test"]').addEventListener('click', this.$test);
 
                         Win.Loader.hide();
                     },
                     onSubmit: (Win) => {
                         const Form = Win.getContent().querySelector('form');
-
-                        this.$Grid.addRow({
-                            server: Form.elements.server.value,
-                            port: Form.elements.port.value,
-                            auth: Form.elements.auth.checked ? 1 : 0,
-                            username: Form.elements.username.value,
-                            password: Form.elements.password.value,
-                            security: Form.elements.security.value,
-                            debug: Form.elements.debug.value,
-                            secureSSL_verify_peer: Form.elements.secureSSL_verify_peer.checked ? 1 : 0,
-                            secureSSL_verify_peer_name: Form.elements.secureSSL_verify_peer_name.checked ? 1 : 0,
-                            secureSSL_allow_self_signed: Form.elements.secureSSL_allow_self_signed.checked ? 1 : 0
-                        });
+                        this.$Grid.addRow(this.$getDataFromForm(Form));
 
                         this.update().then(() => {
                             Win.close();
@@ -284,16 +317,50 @@ define('package/quiqqer/multi-mailer/bin/backend/controls/Grid', [
                 icon: 'fa fa-edit',
                 texticon: 'fa fa-edit',
                 title: QUILocale.get(lg, 'window.editMailServer.title'),
-                maxHeight: 800,
+                maxHeight: 950,
                 maxWidth: 600,
                 autoclose: false,
                 events: {
                     onOpen: (Win) => {
                         Win.Loader.show();
-                        Win.getContent().set('html', Mustache.render(templateServer, {}));
+                        Win.getContent().set('html', Mustache.render(templateServer, {
+                            textMailSettings: QUILocale.get(lg, 'template.mailSettings'),
+                            textMailFrom: QUILocale.get(lg, 'template.mailFrom'),
+                            textMailFromText: QUILocale.get(lg, 'template.mailFromText'),
+                            textMailReplyTo: QUILocale.get(lg, 'template.mailReplyTo'),
+                            textSmtpSettings: QUILocale.get(lg, 'template.textSmtpSettings'),
+                            textSmtpSettingsServer: QUILocale.get(lg, 'template.textSmtpSettingsServer'),
+                            textSmtpSettingsPort: QUILocale.get(lg, 'template.textSmtpSettingsPort'),
+                            textSmtpSettingsDebug: QUILocale.get(lg, 'template.textSmtpSettingsDebug'),
+                            textSmtpSettingsSecurity: QUILocale.get(lg, 'template.textSmtpSettingsSecurity'),
+                            textSmtpSettingsSecuritySSL: QUILocale.get(lg, 'template.textSmtpSettingsSecuritySSL'),
+                            textSmtpSettingsSecurityTLS: QUILocale.get(lg, 'template.textSmtpSettingsSecurityTLS'),
+                            textSmtpSettingsSecureSSL_verify_peer: QUILocale.get(
+                                lg,
+                                'template.textSmtpSettingsSecureSSL_verify_peer'
+                            ),
+                            textSmtpSettingsSecureSSL_verify_peer_name: QUILocale.get(
+                                lg,
+                                'template.textSmtpSettingsSecureSSL_verify_peer_name'
+                            ),
+                            textSmtpSettingsSecureSSL_allow_self_signed: QUILocale.get(
+                                lg,
+                                'template.textSmtpSettingsSecureSSL_allow_self_signed'
+                            ),
+                            textAuth: QUILocale.get(lg, 'template.textAuth'),
+                            textAuthActivate: QUILocale.get(lg, 'template.textAuthActivate'),
+                            textAuthUsername: QUILocale.get(lg, 'template.textAuthUsername'),
+                            textAuthPassword: QUILocale.get(lg, 'template.textAuthPassword'),
+                            textTestButton: QUILocale.get(lg, 'template.textTestButton')
+                        }));
+
+                        Win.getContent().querySelector('[name="test"]').addEventListener('click', this.$test);
 
                         const Form = Win.getContent().querySelector('form');
 
+                        Form.elements.MAILFrom.value = selected[0].MAILFrom;
+                        Form.elements.MAILFromText.value = selected[0].MAILFromText;
+                        Form.elements.MAILReplyTo.value = selected[0].MAILReplyTo;
                         Form.elements.server.value = selected[0].server;
                         Form.elements.port.value = selected[0].port;
                         Form.elements.auth.checked = !!parseInt(selected[0].auth);
@@ -311,18 +378,10 @@ define('package/quiqqer/multi-mailer/bin/backend/controls/Grid', [
                         Win.Loader.show();
                         const Form = Win.getContent().querySelector('form');
 
-                        this.$Grid.setDataByRow(this.$Grid.getSelectedIndices()[0], {
-                            server: Form.elements.server.value,
-                            port: Form.elements.port.value,
-                            auth: Form.elements.auth.checked ? 1 : 0,
-                            username: Form.elements.username.value,
-                            password: Form.elements.password.value,
-                            security: Form.elements.security.value,
-                            debug: Form.elements.debug.value,
-                            secureSSL_verify_peer: Form.elements.secureSSL_verify_peer.checked ? 1 : 0,
-                            secureSSL_verify_peer_name: Form.elements.secureSSL_verify_peer_name.checked ? 1 : 0,
-                            secureSSL_allow_self_signed: Form.elements.secureSSL_allow_self_signed.checked ? 1 : 0
-                        });
+                        this.$Grid.setDataByRow(
+                            this.$Grid.getSelectedIndices()[0],
+                            this.$getDataFromForm(Form)
+                        );
 
                         this.update().then(() => {
                             Win.close();
@@ -330,6 +389,45 @@ define('package/quiqqer/multi-mailer/bin/backend/controls/Grid', [
                     }
                 }
             }).open();
+        },
+
+        $test: function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const SendButton = event.target;
+            const window = SendButton.getParent('.qui-window-popup');
+            const Window = QUI.Controls.getById(window.get('data-quiid'));
+            const Form = window.querySelector('form');
+
+            Window.Loader.show();
+
+            QUIAjax.post('package_quiqqer_multi-mailer_ajax_backend_test', () => {
+                Window.Loader.hide();
+            }, {
+                package: 'quiqqer/multi-mailer',
+                serverData: JSON.encode(this.$getDataFromForm(Form))
+            });
+
+            return false;
+        },
+
+        $getDataFromForm: function(Form) {
+            return {
+                MAILFrom: Form.elements.MAILFrom.value,
+                MAILFromText: Form.elements.MAILFromText.value,
+                MAILReplyTo: Form.elements.MAILReplyTo.value,
+                server: Form.elements.server.value,
+                port: Form.elements.port.value,
+                auth: Form.elements.auth.checked ? 1 : 0,
+                username: Form.elements.username.value,
+                password: Form.elements.password.value,
+                security: Form.elements.security.value,
+                debug: Form.elements.debug.value,
+                secureSSL_verify_peer: Form.elements.secureSSL_verify_peer.checked ? 1 : 0,
+                secureSSL_verify_peer_name: Form.elements.secureSSL_verify_peer_name.checked ? 1 : 0,
+                secureSSL_allow_self_signed: Form.elements.secureSSL_allow_self_signed.checked ? 1 : 0
+            };
         },
 
         //endregion

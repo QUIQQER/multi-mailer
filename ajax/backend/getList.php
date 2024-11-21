@@ -11,10 +11,34 @@ QUI::$Ajax->registerFunction(
         $config = $Config->toArray();
         $servers = [];
 
+        $needles = [
+            'MAILFrom',
+            'MAILFromText',
+            'MAILReplyTo',
+            'server',
+            'port',
+            'auth',
+            'username',
+            'password',
+            'security',
+            'debug',
+            'secureSSL_verify_peer',
+            'secureSSL_verify_peer_name',
+            'secureSSL_allow_self_signed'
+        ];
+
         foreach ($config as $section => $params) {
-            if (str_starts_with($section, 'server-')) {
-                $servers[] = $params;
+            if (!str_starts_with($section, 'server-')) {
+                continue;
             }
+
+            foreach ($needles as $needle) {
+                if (!isset($params[$needle])) {
+                    $params[$needle] = '';
+                }
+            }
+
+            $servers[] = $params;
         }
 
         return $servers;

@@ -20,6 +20,9 @@ QUI::$Ajax->registerFunction(
         $c = 0;
         foreach ($servers as $server) {
             $serverData = [
+                'MAILFrom' => $server['MAILFrom'] ?? '',
+                'MAILFromText' => $server['MAILFromText'] ?? '',
+                'MAILReplyTo' => $server['MAILReplyTo'] ?? '',
                 'server' => $server['server'],
                 'port' => $server['port'] ?? 25,
                 'auth' => $server['auth'] ?? 0,

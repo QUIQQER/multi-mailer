@@ -3,7 +3,7 @@
         <thead>
         <tr>
             <th>
-                SMTP-Server Einstellungen
+                {{textMailSettings}}
             </th>
         </tr>
         </thead>
@@ -11,9 +11,21 @@
         <tr>
             <td>
                 <label class="field-container">
-                    <div class="field-container-item">SMTP Server</div>
+                    <div class="field-container-item">{{textMailFrom}}</div>
                     <input type="text"
-                           name="server"
+                           name="MAILFrom"
+                           class="field-container-field"
+                           required
+                    />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <div class="field-container-item">{{textMailFromText}}</div>
+                    <input type="text"
+                           name="MAILFromText"
                            class="field-container-field"
                     />
                 </label>
@@ -22,7 +34,42 @@
         <tr>
             <td>
                 <label class="field-container">
-                    <div class="field-container-item">SMTP Port</div>
+                    <div class="field-container-item">{{textMailReplyTo}}</div>
+                    <input type="text"
+                           name="MAILReplyTo"
+                           class="field-container-field"
+                    />
+                </label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="data-table data-table-flexbox">
+        <thead>
+        <tr>
+            <th>
+                {{textSmtpSettings}}
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <div class="field-container-item">{{textSmtpSettingsServer}}</div>
+                    <input type="text"
+                           name="server"
+                           class="field-container-field"
+                           required
+                    />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <div class="field-container-item">{{textSmtpSettingsPort}}</div>
                     <input type="number"
                            name="port"
                            class="field-container-field"
@@ -33,7 +80,7 @@
         <tr>
             <td>
                 <label class="field-container">
-                    <div class="field-container-item">SMTP Debug Level</div>
+                    <div class="field-container-item">{{textSmtpSettingsDebug}}</div>
                     <input type="number"
                            name="debug"
                            class="field-container-field"
@@ -45,11 +92,11 @@
         <tr>
             <td>
                 <label class="field-container">
-                    <div class="field-container-item">Verbindungssicherheit</div>
+                    <div class="field-container-item">{{textSmtpSettingsSecurity}}</div>
                     <select name="security" class="field-container-field">
                         <option value="">---</option>
-                        <option value="ssl">SSL</option>
-                        <option value="tls">TLS</option>
+                        <option value="ssl">{{textSmtpSettingsSecuritySSL}}</option>
+                        <option value="tls">{{textSmtpSettingsSecurityTLS}}</option>
                     </select>
                 </label>
             </td>
@@ -59,7 +106,7 @@
                 <p>
                     <label class="checkbox-label hasCheckbox">
                         <input type="checkbox" name="secureSSL_verify_peer"/>
-                        Verifizierung des verwendeten SSL-Zertifikats voraussetzen.
+                        {{textSmtpSettingsSecureSSL_verify_peer}}
                     </label>
                 </p>
             </td>
@@ -69,7 +116,7 @@
                 <p>
                     <label class="checkbox-label hasCheckbox">
                         <input type="checkbox" name="secureSSL_verify_peer_name">
-                        Erfordere die Verfikation des Peernamens.
+                        {{textSmtpSettingsSecureSSL_verify_peer_name}}
                     </label>
                 </p>
             </td>
@@ -79,7 +126,7 @@
                 <p>
                     <label class="checkbox-label hasCheckbox">
                         <input type="checkbox" name="secureSSL_allow_self_signed">
-                        Selbst signierte Zerifikate erlauben.
+                        {{textSmtpSettingsSecureSSL_allow_self_signed}}
                     </label>
                 </p>
             </td>
@@ -91,7 +138,7 @@
         <thead>
         <tr>
             <th>
-                SMTP-Server Einstellungen
+                {{textAuth}}
             </th>
         </tr>
         </thead>
@@ -99,7 +146,7 @@
         <tr>
             <td>
                 <label class="field-container hasCheckbox">
-                    <div class="field-container-item">SMTP Authentifizierung aktivieren?</div>
+                    <div class="field-container-item">{{textAuthActivate}}</div>
                     <div class="field-container-field">
                         <input type="checkbox"
                                name="auth"
@@ -112,7 +159,7 @@
         <tr>
             <td>
                 <label class="field-container">
-                    <div class="field-container-item">SMTP Benutzer</div>
+                    <div class="field-container-item">{{textAuthUsername}}</div>
                     <input type="text"
                            name="username"
                            class="field-container-field"
@@ -124,7 +171,7 @@
         <tr>
             <td>
                 <label class="field-container">
-                    <div class="field-container-item">SMTP Passwort</div>
+                    <div class="field-container-item">{{textAuthPassword}}</div>
                     <input type="password"
                            name="password"
                            class="field-container-field"
@@ -135,4 +182,10 @@
         </tr>
         </tbody>
     </table>
+
+    <button name="test" style="float: right"
+            class="btn btn-primary qui-button--no-icon qui-button qui-utils-noselect btn-silver"
+    >
+        {{textTestButton}}
+    </button>
 </form>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiqqer>
+    <settings name="QUI">
+        <config>
+            <section name="multi-mailer">
+            </section>
+        </config>
+
+        <window name="quiqqer">
+            <categories>
+                <category name="multi-mailer">
+
+                    <text>
+                        <locale group="quiqqer/multi-mailer" var="window.qui.multi.mailer.title"/>
+                    </text>
+                    <icon>fa fa-envelope</icon>
+
+                    <settings title="multi-mailer" name="multi-mailer">
+                        <title>
+                            <locale group="quiqqer/multi-mailer" var="multi-mailer.settings.title"/>
+                        </title>
+
+                        <input type="hidden"
+                               data-qui="package/quiqqer/multi-mailer/bin/backend/controls/Grid"
+                               label="false">
+                            <text>
+                                Zusätzliche Mailserver
+                            </text>
+                            <description>
+                                Änderungen werden automatisch gespeichert.
+                            </description>
+                        </input>
+                    </settings>
+
+                </category>
+            </categories>
+        </window>
+    </settings>
+</quiqqer>

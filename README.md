@@ -16,12 +16,10 @@ Package name:
 Features
 --------
 
-- Create multiple mail servers: Configure any number of mail servers in a priority order.
-- Automatic failover: If a mail server is unavailable, the system seamlessly switches to the next one.
+- Create multiple mail servers: Configure any number of mail servers.
+- Automatic fail over: If a mail server is unavailable, the system seamlessly switches to the next one.
 - Logging: Traceable logs of all mailing attempts and server changes.
-- Configurable priorities: Determine the order in which the mail servers should be used.
 - Easy integration: Seamless use in existing QUIQQER projects.
-
 
 Installation
 ------------

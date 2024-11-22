@@ -3,7 +3,6 @@
 namespace QUI\MultiMailer;
 
 use PHPMailer\PHPMailer\PHPMailer;
-
 use QUI\Mail\Queue;
 use QUI\Mail\Log;
 use Throwable;

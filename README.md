@@ -5,13 +5,12 @@ QUIQQER Multi Mailer
 
 Multi Mailer - Reliable mail delivery system with automatic failover
 
-The Multi Mailer module allows you to set up multiple mail servers in QUIQQER to ensure reliable mail delivery. If a mail server fails or is unable to send, the next available mail server is automatically used.
-
+The Multi Mailer module allows you to set up multiple mail servers in QUIQQER to ensure reliable mail delivery.
+If a mail server fails or is unable to send, the next available mail server is automatically used.
 
 Package name:
 
     quiqqer/multi-mailer
-
 
 Features
 --------
@@ -32,7 +31,6 @@ Contribution
 
 - Issue Tracker: https://dev.quiqqer.com/quiqqer/multi-mailer/issues
 - Source Code: https://dev.quiqqer.com/quiqqer/multi-mailer
-
 
 Support
 -------

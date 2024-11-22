@@ -4,11 +4,11 @@
  * This file contains package_quiqqer_multi-mailer_ajax_backend_update
  */
 
-QUI::$Ajax->registerFunction(
+QUI::$Ajax?->registerFunction(
     'package_quiqqer_multi-mailer_ajax_backend_update',
     function ($servers) {
         $Config = QUI::getPackage('quiqqer/multi-mailer')->getConfig();
-        $config = $Config->toArray();
+        $config = $Config?->toArray() ?? [];
         $servers = json_decode($servers, true);
 
         foreach ($config as $section => $params) {
@@ -35,11 +35,11 @@ QUI::$Ajax->registerFunction(
                 'secureSSL_allow_self_signed' => $server['secureSSL_allow_self_signed'] ?? '',
             ];
 
-            $Config->setSection('server-' . $c, $serverData);
+            $Config?->setSection('server-' . $c, $serverData);
             $c++;
         }
 
-        $Config->save();
+        $Config?->save();
     },
     ['servers'],
     'Permission::checkAdminUser'

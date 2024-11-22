@@ -4,9 +4,7 @@
  * This file contains package_quiqqer_multi-mailer_ajax_backend_test
  */
 
-use PHPMailer\PHPMailer\PHPMailer;
-
-QUI::$Ajax->registerFunction(
+QUI::$Ajax?->registerFunction(
     'package_quiqqer_multi-mailer_ajax_backend_test',
     function ($serverData) {
         $serverData = json_decode($serverData, true);

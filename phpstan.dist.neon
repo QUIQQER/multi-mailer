@@ -4,6 +4,9 @@ includes:
 parameters:
     level: 8
     paths:
-        src
-        ajax
+        - src
+        - ajax
     tipsOfTheDay: false
+    bootstrapFiles:
+        - tests/phpstan-bootstrap.php
+    treatPhpDocTypesAsCertain: false

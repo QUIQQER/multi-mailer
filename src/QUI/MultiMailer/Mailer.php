@@ -11,60 +11,63 @@ use function rtrim;
 
 class Mailer
 {
-    public static function getMainMailer(): ?PHPMailer
+    /**
+     * @return string[]
+     */
+    public static function getMainMailerConfig(): array
     {
         $config = QUI::conf('mail');
-        $Mail = new PHPMailer(true);
+
+        $server = [
+            'MAILFrom' => $config['MAILFrom'],
+            'MAILFromText' => $config['MAILFromText'],
+            'MAILReplyTo' => '',
+            'server' => '',
+            'port' => '',
+            'auth' => '',
+            'username' => '',
+            'password' => '',
+            'security' => '',
+            'debug' => '',
+            'secureSSL_verify_peer' => '',
+            'secureSSL_verify_peer_name' => '',
+            'secureSSL_allow_self_signed' => ''
+        ];
 
         if (isset($config['SMTP']) && $config['SMTP']) {
-            $Mail->Mailer = 'smtp';
-            $Mail->Host = $config['SMTPServer'];
-            $Mail->SMTPAuth = $config['SMTPAuth'];
-            $Mail->Username = $config['SMTPUser'];
-            $Mail->Password = $config['SMTPPass'];
+            $server['server'] = $config['SMTPServer'];
+            $server['auth'] = $config['SMTPAuth'];
+            $server['username'] = $config['SMTPUser'];
+            $server['password'] = $config['SMTPPass'];
 
             if (!empty($config['SMTPPort'])) {
-                $Mail->Port = (int)$config['SMTPPort'];
+                $server['port'] = (int)$config['SMTPPort'];
             }
 
             if (!empty($config['SMTPDebug'])) {
-                $Mail->SMTPDebug = (int)$config['SMTPDebug'];
-
-                $Mail->Debugoutput = static function ($str, $level): void {
-                    Log::write(rtrim($str));
-                };
+                $server['debug'] = (int)$config['SMTPDebug'];
             }
 
             if (isset($config['SMTPSecure'])) {
                 switch ($config['SMTPSecure']) {
                     case "tls":
                     case "ssl":
-                        $Mail->SMTPSecure = $config['SMTPSecure'];
+                        $server['security'] = $config['SMTPSecure'];
                         break;
                 }
             }
 
-            /**
-             * These options are set regardless of the "SMTPSecure" setting
-             * because PHPMailer may try to establish a secure connection if the mail
-             * server supports it regardless of the "SMTPSecure" setting.
-             */
-            $Mail->SMTPOptions = [
-                'ssl' => [
-                    'verify_peer' => (int)$config['SMTPSecureSSL_verify_peer'],
-                    'verify_peer_name' => (int)$config['SMTPSecureSSL_verify_peer_name'],
-                    'allow_self_signed' => (int)$config['SMTPSecureSSL_allow_self_signed']
-                ]
-            ];
+            $server['secureSSL_verify_peer'] = (int)$config['SMTPSecureSSL_verify_peer'];
+            $server['secureSSL_verify_peer_name'] = (int)$config['SMTPSecureSSL_verify_peer_name'];
+            $server['secureSSL_allow_self_signed'] = (int)$config['SMTPSecureSSL_allow_self_signed'];
         }
 
-        $Mail->From = $config['MAILFrom'];
-        $Mail->FromName = $config['MAILFromText'];
-        $Mail->CharSet = 'UTF-8';
-
-        return $Mail;
+        return $server;
     }
 
+    /**
+     * @return array<int, string[]>
+     */
     public static function getList(): array
     {
         try {
@@ -74,7 +77,7 @@ class Mailer
             return [];
         }
 
-        $config = $Config->toArray();
+        $config = $Config?->toArray() ?? [];
         $servers = [];
 
         $needles = [
@@ -111,6 +114,7 @@ class Mailer
     }
 
     /**
+     * @param string[] $serverData
      * @throws Exception
      */
     public static function parseMailServerDataToPhpMailer(array $serverData = []): PHPMailer
@@ -126,9 +130,9 @@ class Mailer
          */
         $mail->SMTPOptions = [
             'ssl' => [
-                'verify_peer' => (int)$serverData['secureSSL_verify_peer'] ?? 0,
-                'verify_peer_name' => (int)$serverData['secureSSL_verify_peer_name'] ?? 0,
-                'allow_self_signed' => (int)$serverData['secureSSL_allow_self_signed'] ?? 0
+                'verify_peer' => (int)$serverData['secureSSL_verify_peer'],
+                'verify_peer_name' => (int)$serverData['secureSSL_verify_peer_name'],
+                'allow_self_signed' => (int)$serverData['secureSSL_allow_self_signed']
             ]
         ];
 
@@ -137,7 +141,7 @@ class Mailer
         }
 
         if (!empty($serverData['port'])) {
-            $mail->Port = $serverData['port'];
+            $mail->Port = (int)$serverData['port'];
         }
 
         if (!empty($serverData['auth'])) {
@@ -176,7 +180,7 @@ class Mailer
             $mail->addReplyTo($serverData['MAILReplyTo']);
         }
 
-        if (!empty($config['debug'])) {
+        if (!empty($serverData['debug'])) {
             $mail->SMTPDebug = (int)$serverData['debug'];
 
             $mail->Debugoutput = static function ($str, $level): void {
@@ -190,11 +194,7 @@ class Mailer
     public static function getRandomPHPMailer(): ?PHPMailer
     {
         $servers = self::getList();
-        $servers[] = self::getMainMailer();
-
-        if (empty($servers)) {
-            return null;
-        }
+        $servers[] = self::getMainMailerConfig();
 
         $rand = rand(0, count($servers) - 1);
 

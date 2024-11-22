@@ -206,4 +206,38 @@ class Mailer
 
         return null;
     }
+
+    public static function retryWithNextServer(PHPMailer $PhpMailer): bool
+    {
+        try {
+            $NewRandom = Mailer::getRandomPHPMailer();
+
+            if (!$NewRandom) {
+                Log::write('multi-mailer error - retry error: no more servers');
+                return false;
+            }
+
+            $PhpMailer->Host = $NewRandom->Host;
+            $PhpMailer->Port = $NewRandom->Port;
+            $PhpMailer->Username = $NewRandom->Username;
+            $PhpMailer->Password = $NewRandom->Password;
+            $PhpMailer->SMTPAuth = $NewRandom->SMTPAuth;
+            $PhpMailer->SMTPSecure = $NewRandom->SMTPSecure;
+            $PhpMailer->SMTPDebug = $NewRandom->SMTPDebug;
+
+            $PhpMailer->setFrom($NewRandom->From, $NewRandom->FromName);
+
+            $PhpMailer->clearReplyTos();
+            $PhpMailer->addReplyTo($NewRandom->From, $NewRandom->FromName);
+
+            // retry with new mailer settings
+            $PhpMailer->send();
+
+            return true;
+        } catch (\Exception $exception) {
+            Log::write('multi-mailer error - retry error: ' . $exception->getMessage());
+        }
+
+        return false;
+    }
 }

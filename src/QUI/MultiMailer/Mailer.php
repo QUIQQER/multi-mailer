@@ -152,7 +152,7 @@ class Mailer
             }
 
             if (!empty($serverData['password'])) {
-                $mail->Username = $serverData['password'];
+                $mail->Password = $serverData['password'];
             }
         }
 

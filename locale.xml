@@ -40,6 +40,11 @@
     </groups>
 
     <groups name="quiqqer/multi-mailer" datatype="js">
+        <locale name="window.addMailServer.title">
+            <de><![CDATA[SMTP Mailserver hinzufügen]]></de>
+            <en><![CDATA[Add SMTP mail server]]></en>
+        </locale>
+
         <locale name="window.removeMailServer.title">
             <de><![CDATA[SMTP Mailserver entfernen]]></de>
             <en><![CDATA[Remove SMTP mail server]]></en>
@@ -133,6 +138,38 @@
         <locale name="template.textTestButton">
             <de><![CDATA[SMTP Mail Server Einstellungen testen]]></de>
             <en><![CDATA[Test SMTP mail server settings]]></en>
+        </locale>
+        <locale name="template.textIsFallbackServer">
+            <de><![CDATA[Ist Fallback-Server]]></de>
+            <en><![CDATA[Is fallback server]]></en>
+        </locale>
+        <locale name="template.textIsFallbackServer.description" html="true">
+            <de><![CDATA[
+            <p>
+            Diese Einstellung definiert, ob der Mail-Server als Fallback-Server fungieren soll.
+            Ein Fallback-Server wird standardmäßig nicht für den Versand von E-Mails verwendet.
+            Er kommt nur dann zum Einsatz, wenn ein Standard-Server einen Fehler zurückmeldet oder der Versand über diesen fehlschlägt.
+            </p>
+
+            <p>Funktionsweise:</p>
+            <ul>
+            <li>Deaktiviert: Der Server wird wie ein normaler Standard-Server verwendet.</li>
+            <li>Aktiviert: Der Server wird nur als Alternative genutzt, wenn ein Versand über die Standard-Server nicht erfolgreich ist.</li>
+            </ul>
+            ]]></de>
+            <en><![CDATA[
+            <p>
+            Diese Einstellung definiert, ob der Mail-Server als Fallback-Server fungieren soll.
+            Ein Fallback-Server wird standardmäßig nicht für den Versand von E-Mails verwendet.
+            Er kommt nur dann zum Einsatz, wenn ein Standard-Server einen Fehler zurückmeldet oder der Versand über diesen fehlschlägt.
+            </p>
+
+            <p>Funktionsweise:</p>
+            <ul>
+            <li>Deaktiviert: Der Server wird wie ein normaler Standard-Server verwendet.</li>
+            <li>Aktiviert: Der Server wird nur als Alternative genutzt, wenn ein Versand über die Standard-Server nicht erfolgreich ist.</li>
+            </ul>
+            ]]></en>
         </locale>
 
     </groups>

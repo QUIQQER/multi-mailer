@@ -24,6 +24,12 @@ QUI::$Ajax?->registerFunction(
             $mail->Body = QUI::getLocale()->get('quiqqer/multi-mailer', 'text.mail.body');
             $mail->AltBody = QUI::getLocale()->get('quiqqer/multi-mailer', 'mail.test.altBody');
 
+            $mail->SMTPDebug = 3;
+            $mail->Debugoutput = static function ($str, $level): void {
+                QUI\System\Log::writeRecursive(rtrim($str) . PHP_EOL);
+                QUI\Mail\Log::write(rtrim($str));
+            };
+
             $mail->send();
 
             QUI::getMessagesHandler()->addSuccess(

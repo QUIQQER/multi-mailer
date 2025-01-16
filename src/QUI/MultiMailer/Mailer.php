@@ -240,6 +240,11 @@ class Mailer
         return null;
     }
 
+    /**
+     * Returns only fallback servers
+     *
+     * @return PHPMailer|null
+     */
     public static function getRandomFallbackPHPMailer(): ?PHPMailer
     {
         $servers = self::getFallBackServerList();

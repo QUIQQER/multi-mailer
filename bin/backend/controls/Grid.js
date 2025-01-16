@@ -116,6 +116,12 @@ define('package/quiqqer/multi-mailer/bin/backend/controls/Grid', [
                         dataType: 'node',
                         width: 50
                     }, {
+                        header: QUILocale.get(lg, 'template.textIsFallbackServer'),
+                        title: QUILocale.get(lg, 'template.textIsFallbackServer'),
+                        dataIndex: 'display_isFallbackServer',
+                        dataType: 'node',
+                        width: 50
+                    }, {
                         hidden: true,
                         dataIndex: 'MAILFromText'
                     }, {
@@ -183,6 +189,10 @@ define('package/quiqqer/multi-mailer/bin/backend/controls/Grid', [
                         servers[i].display_secureSSL_allow_self_signed = new Element('div', {
                             'class': parseInt(servers[i].secureSSL_allow_self_signed) ? 'fa fa-check' : 'fa fa-minus'
                         });
+
+                        servers[i].display_isFallbackServer = new Element('div', {
+                            'class': parseInt(servers[i].isFallbackServer) ? 'fa fa-check' : 'fa fa-minus'
+                        });
                     });
 
                     this.$Grid.setData({
@@ -217,8 +227,10 @@ define('package/quiqqer/multi-mailer/bin/backend/controls/Grid', [
         addMailServer: function() {
             new QUIConfirm({
                 title: QUILocale.get(lg, 'window.addMailServer.title'),
+                icon: 'fa fa-envelope',
                 maxHeight: 950,
                 maxWidth: 600,
+                autoclose: false,
                 events: {
                     onOpen: (Win) => {
                         Win.Loader.show();
@@ -246,6 +258,8 @@ define('package/quiqqer/multi-mailer/bin/backend/controls/Grid', [
                                 lg,
                                 'template.textSmtpSettingsSecureSSL_allow_self_signed'
                             ),
+                            textIsFallbackServer: QUILocale.get(lg, 'template.textIsFallbackServer'),
+                            textIsFallbackServerDescription: QUILocale.get(lg, 'template.textIsFallbackServer.description'),
                             textAuth: QUILocale.get(lg, 'template.textAuth'),
                             textAuthActivate: QUILocale.get(lg, 'template.textAuthActivate'),
                             textAuthUsername: QUILocale.get(lg, 'template.textAuthUsername'),
@@ -259,7 +273,14 @@ define('package/quiqqer/multi-mailer/bin/backend/controls/Grid', [
                     },
                     onSubmit: (Win) => {
                         const Form = Win.getContent().querySelector('form');
-                        this.$Grid.addRow(this.$getDataFromForm(Form));
+                        const data = this.$getDataFromForm(Form);
+
+                        if (data.server === '') {
+                            Form.elements.server.focus();
+                            return;
+                        }
+
+                        this.$Grid.addRow(data);
 
                         this.update().then(() => {
                             Win.close();
@@ -347,6 +368,8 @@ define('package/quiqqer/multi-mailer/bin/backend/controls/Grid', [
                                 lg,
                                 'template.textSmtpSettingsSecureSSL_allow_self_signed'
                             ),
+                            textIsFallbackServer: QUILocale.get(lg, 'template.textIsFallbackServer'),
+                            textIsFallbackServerDescription: QUILocale.get(lg, 'template.textIsFallbackServer.description'),
                             textAuth: QUILocale.get(lg, 'template.textAuth'),
                             textAuthActivate: QUILocale.get(lg, 'template.textAuthActivate'),
                             textAuthUsername: QUILocale.get(lg, 'template.textAuthUsername'),
@@ -371,6 +394,7 @@ define('package/quiqqer/multi-mailer/bin/backend/controls/Grid', [
                         Form.elements.secureSSL_verify_peer.checked = !!parseInt(selected[0].secureSSL_verify_peer);
                         Form.elements.secureSSL_verify_peer_name.checked = !!parseInt(selected[0].secureSSL_verify_peer_name);
                         Form.elements.secureSSL_allow_self_signed.checked = !!parseInt(selected[0].secureSSL_allow_self_signed);
+                        Form.elements.isFallbackServer.checked = !!parseInt(selected[0].isFallbackServer);
 
                         Win.Loader.hide();
                     },
@@ -426,7 +450,8 @@ define('package/quiqqer/multi-mailer/bin/backend/controls/Grid', [
                 debug: Form.elements.debug.value,
                 secureSSL_verify_peer: Form.elements.secureSSL_verify_peer.checked ? 1 : 0,
                 secureSSL_verify_peer_name: Form.elements.secureSSL_verify_peer_name.checked ? 1 : 0,
-                secureSSL_allow_self_signed: Form.elements.secureSSL_allow_self_signed.checked ? 1 : 0
+                secureSSL_allow_self_signed: Form.elements.secureSSL_allow_self_signed.checked ? 1 : 0,
+                isFallbackServer: Form.elements.isFallbackServer.checked ? 1 : 0,
             };
         },
 

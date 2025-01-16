@@ -31,7 +31,8 @@ class Mailer
             'debug' => '',
             'secureSSL_verify_peer' => '',
             'secureSSL_verify_peer_name' => '',
-            'secureSSL_allow_self_signed' => ''
+            'secureSSL_allow_self_signed' => '',
+            'isFallbackServer' => 0
         ];
 
         if (isset($config['SMTP']) && $config['SMTP']) {
@@ -68,7 +69,7 @@ class Mailer
     /**
      * @return array<int, string[]>
      */
-    public static function getList(): array
+    public static function getList($withFallbackServer = false): array
     {
         try {
             $Config = QUI::getPackage('quiqqer/multi-mailer')->getConfig();
@@ -93,7 +94,8 @@ class Mailer
             'debug',
             'secureSSL_verify_peer',
             'secureSSL_verify_peer_name',
-            'secureSSL_allow_self_signed'
+            'secureSSL_allow_self_signed',
+            'isFallbackServer'
         ];
 
         foreach ($config as $section => $params) {
@@ -101,14 +103,39 @@ class Mailer
                 continue;
             }
 
+            if (
+                $withFallbackServer === false
+                && isset($params['isFallbackServer'])
+                && $params['isFallbackServer'] == 1
+            ) {
+                continue;
+            }
+
             foreach ($needles as $needle) {
                 if (!isset($params[$needle])) {
                     $params[$needle] = '';
+                }
+
+                if ($needle === 'isFallbackServer' && empty($params[$needle])) {
+                    $params[$needle] = 0;
                 }
             }
 
             $servers[] = $params;
         }
+
+        return $servers;
+    }
+
+    /**
+     * @return array<int, string[]>
+     */
+    public static function getFallBackServerList(): array
+    {
+        $servers = self::getList(true);
+        $servers = array_filter($servers, function ($server) {
+            return $server['isFallbackServer'] == 1;
+        });
 
         return $servers;
     }
@@ -180,6 +207,10 @@ class Mailer
             $mail->addReplyTo($serverData['MAILReplyTo']);
         }
 
+        if (!$mail->SMTPAuth) {
+            $mail->SMTPSecure = '';
+        }
+
         if (!empty($serverData['debug'])) {
             $mail->SMTPDebug = (int)$serverData['debug'];
 
@@ -191,9 +222,11 @@ class Mailer
         return $mail;
     }
 
-    public static function getRandomPHPMailer(): ?PHPMailer
+    //region PHPMailer
+
+    public static function getRandomPHPMailer($includeFallbackServer = false): ?PHPMailer
     {
-        $servers = self::getList();
+        $servers = self::getList($includeFallbackServer);
         $servers[] = self::getMainMailerConfig();
 
         $rand = rand(0, count($servers) - 1);
@@ -207,10 +240,31 @@ class Mailer
         return null;
     }
 
+    /**
+     * Returns only fallback servers
+     *
+     * @return PHPMailer|null
+     */
+    public static function getRandomFallbackPHPMailer(): ?PHPMailer
+    {
+        $servers = self::getFallBackServerList();
+        $rand = rand(0, count($servers) - 1);
+
+        try {
+            return self::parseMailServerDataToPhpMailer($servers[$rand]);
+        } catch (\Exception $exception) {
+            Log::write($exception->getMessage());
+        }
+
+        return null;
+    }
+
+    //endregion
+
     public static function retryWithNextServer(PHPMailer $PhpMailer): bool
     {
         try {
-            $NewRandom = Mailer::getRandomPHPMailer();
+            $NewRandom = Mailer::getRandomPHPMailer(true);
 
             if (!$NewRandom) {
                 Log::write('multi-mailer error - retry error: no more servers');

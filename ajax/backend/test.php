@@ -21,8 +21,14 @@ QUI::$Ajax?->registerFunction(
 
             $mail->isHTML();
             $mail->Subject = QUI::getLocale()->get('quiqqer/multi-mailer', 'mail.test.subject');
-            $mail->Body = QUI::getLocale()->get('quiqqer/multi-mailer', 'text.mail.body');
+            $mail->Body = QUI::getLocale()->get('quiqqer/multi-mailer', 'mail.test.body');
             $mail->AltBody = QUI::getLocale()->get('quiqqer/multi-mailer', 'mail.test.altBody');
+
+            $mail->SMTPDebug = 3;
+            $mail->Debugoutput = static function ($str, $level): void {
+                QUI\System\Log::writeRecursive(rtrim($str) . PHP_EOL);
+                QUI\Mail\Log::write(rtrim($str));
+            };
 
             $mail->send();
 

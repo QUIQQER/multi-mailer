@@ -33,6 +33,7 @@ QUI::$Ajax?->registerFunction(
                 'secureSSL_verify_peer' => $server['secureSSL_verify_peer'] ?? '',
                 'secureSSL_verify_peer_name' => $server['secureSSL_verify_peer_name'] ?? '',
                 'secureSSL_allow_self_signed' => $server['secureSSL_allow_self_signed'] ?? '',
+                'isFallbackServer' => $server['isFallbackServer'] ?? '',
             ];
 
             $Config?->setSection('server-' . $c, $serverData);

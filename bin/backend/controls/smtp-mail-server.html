@@ -1,0 +1,211 @@
+<form autocomplete="off" style="display: inline-block; width: 100%;">
+    <table class="data-table data-table-flexbox">
+        <thead>
+        <tr>
+            <th>
+                {{textMailSettings}}
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">{{textMailFrom}}</span>
+                    <input type="text"
+                           name="MAILFrom"
+                           class="field-container-field"
+                           required
+                    />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">{{textMailFromText}}</span>
+                    <input type="text"
+                           name="MAILFromText"
+                           class="field-container-field"
+                    />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">{{textMailReplyTo}}</span>
+                    <input type="text"
+                           name="MAILReplyTo"
+                           class="field-container-field"
+                    />
+                </label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="data-table data-table-flexbox">
+        <thead>
+        <tr>
+            <th>
+                {{textSmtpSettings}}
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">{{textSmtpSettingsServer}}</span>
+                    <input type="text"
+                           name="server"
+                           class="field-container-field"
+                           required
+                    />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">{{textSmtpSettingsPort}}</span>
+                    <input type="number"
+                           name="port"
+                           class="field-container-field"
+                    />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">{{textSmtpSettingsDebug}}</span>
+                    <input type="number"
+                           name="debug"
+                           class="field-container-field"
+                           placeholder="0"
+                    />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">{{textSmtpSettingsSecurity}}</span>
+                    <select name="security" class="field-container-field">
+                        <option value="">---</option>
+                        <option value="ssl">{{textSmtpSettingsSecuritySSL}}</option>
+                        <option value="tls">{{textSmtpSettingsSecurityTLS}}</option>
+                    </select>
+                </label>
+            </td>
+        </tr>
+        <tr class="ssl-option-row even" style="float: left; height: 36px; overflow: hidden; position: relative;">
+            <td>
+                <p>
+                    <label class="checkbox-label hasCheckbox">
+                        <input type="checkbox" name="secureSSL_verify_peer"/>
+                        {{textSmtpSettingsSecureSSL_verify_peer}}
+                    </label>
+                </p>
+            </td>
+        </tr>
+        <tr class="ssl-option-row odd" style="float: left; height: 36px; overflow: hidden; position: relative;">
+            <td>
+                <p>
+                    <label class="checkbox-label hasCheckbox">
+                        <input type="checkbox" name="secureSSL_verify_peer_name">
+                        {{textSmtpSettingsSecureSSL_verify_peer_name}}
+                    </label>
+                </p>
+            </td>
+        </tr>
+        <tr class="ssl-option-row even" style="float: left; height: 36px; overflow: hidden; position: relative;">
+            <td>
+                <p>
+                    <label class="checkbox-label hasCheckbox">
+                        <input type="checkbox" name="secureSSL_allow_self_signed">
+                        {{textSmtpSettingsSecureSSL_allow_self_signed}}
+                    </label>
+                </p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="data-table data-table-flexbox">
+        <tbody>
+        <tr>
+            <td>
+                <label class="checkbox-label hasCheckbox">
+                    <input type="checkbox" name="isFallbackServer">
+                    {{textIsFallbackServer}}
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="field-container-item-desc" style="padding: 10px;">
+                    {{{textIsFallbackServerDescription}}}
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="data-table data-table-flexbox">
+        <thead>
+        <tr>
+            <th>
+                {{textAuth}}
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <label class="field-container hasCheckbox">
+                    <span class="field-container-item">{{textAuthActivate}}</span>
+                    <span class="field-container-field">
+                        <input type="checkbox"
+                               name="auth"
+                               class="field-container-field"
+                        />
+                    </span>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">{{textAuthUsername}}</span>
+                    <input type="text"
+                           name="username"
+                           class="field-container-field"
+                           autocomplete="new-password"
+                    />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">{{textAuthPassword}}</span>
+                    <input type="password"
+                           name="password"
+                           class="field-container-field"
+                           autocomplete="new-password"
+                    />
+                </label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button name="test" style="float: right"
+            class="btn btn-primary qui-button--no-icon qui-button qui-utils-noselect btn-silver"
+    >
+        {{textTestButton}}
+    </button>
+</form>

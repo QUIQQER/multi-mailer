@@ -12,15 +12,15 @@ use function rtrim;
 class Mailer
 {
     /**
-     * @return string[]
+     * @return array<string, string|int>
      */
     public static function getMainMailerConfig(): array
     {
         $config = QUI::conf('mail');
 
         $server = [
-            'MAILFrom' => $config['MAILFrom'],
-            'MAILFromText' => $config['MAILFromText'],
+            'MAILFrom' => (string)$config['MAILFrom'],
+            'MAILFromText' => (string)$config['MAILFromText'],
             'MAILReplyTo' => '',
             'server' => '',
             'port' => '',
@@ -36,10 +36,10 @@ class Mailer
         ];
 
         if (isset($config['SMTP']) && $config['SMTP']) {
-            $server['server'] = $config['SMTPServer'];
-            $server['auth'] = $config['SMTPAuth'];
-            $server['username'] = $config['SMTPUser'];
-            $server['password'] = $config['SMTPPass'];
+            $server['server'] = (string)$config['SMTPServer'];
+            $server['auth'] = (int)$config['SMTPAuth'];
+            $server['username'] = (string)$config['SMTPUser'];
+            $server['password'] = (string)$config['SMTPPass'];
 
             if (!empty($config['SMTPPort'])) {
                 $server['port'] = (int)$config['SMTPPort'];
@@ -53,7 +53,7 @@ class Mailer
                 switch ($config['SMTPSecure']) {
                     case "tls":
                     case "ssl":
-                        $server['security'] = $config['SMTPSecure'];
+                        $server['security'] = (string)$config['SMTPSecure'];
                         break;
                 }
             }
@@ -67,9 +67,9 @@ class Mailer
     }
 
     /**
-     * @return array<int, string[]>
+     * @return array<int, array<string, string|int>>
      */
-    public static function getList($withFallbackServer = false): array
+    public static function getList(bool $withFallbackServer = false): array
     {
         try {
             $Config = QUI::getPackage('quiqqer/multi-mailer')->getConfig();
@@ -128,7 +128,7 @@ class Mailer
     }
 
     /**
-     * @return array<int, string[]>
+     * @return array<int, array<string, string|int>>
      */
     public static function getFallBackServerList(): array
     {
@@ -141,7 +141,7 @@ class Mailer
     }
 
     /**
-     * @param string[] $serverData
+     * @param array<string, string|int> $serverData
      * @throws Exception
      */
     public static function parseMailServerDataToPhpMailer(array $serverData = []): PHPMailer
@@ -164,7 +164,7 @@ class Mailer
         ];
 
         if (!empty($serverData['server'])) {
-            $mail->Host = $serverData['server'];
+            $mail->Host = (string)$serverData['server'];
         }
 
         if (!empty($serverData['port'])) {
@@ -175,11 +175,11 @@ class Mailer
             $mail->SMTPAuth = true;
 
             if (!empty($serverData['username'])) {
-                $mail->Username = $serverData['username'];
+                $mail->Username = (string)$serverData['username'];
             }
 
             if (!empty($serverData['password'])) {
-                $mail->Password = $serverData['password'];
+                $mail->Password = (string)$serverData['password'];
             }
         }
 
@@ -197,14 +197,17 @@ class Mailer
 
         if (!empty($serverData['MAILFrom'])) {
             if (!empty($serverData['MAILFromText'])) {
-                $mail->setFrom($serverData['MAILFrom'], $serverData['MAILFromText']);
+                $mail->setFrom(
+                    (string)$serverData['MAILFrom'],
+                    (string)$serverData['MAILFromText']
+                );
             } else {
-                $mail->setFrom($serverData['MAILFrom']);
+                $mail->setFrom((string)$serverData['MAILFrom']);
             }
         }
 
         if (!empty($serverData['MAILReplyTo'])) {
-            $mail->addReplyTo($serverData['MAILReplyTo']);
+            $mail->addReplyTo((string)$serverData['MAILReplyTo']);
         }
 
         if (!$mail->SMTPAuth) {
@@ -224,15 +227,28 @@ class Mailer
 
     //region PHPMailer
 
-    public static function getRandomPHPMailer($includeFallbackServer = false): ?PHPMailer
-    {
+    public static function getRandomPHPMailer(
+        bool $includeFallbackServer = false,
+        ?PHPMailer $ExcludedMailer = null
+    ): ?PHPMailer {
         $servers = self::getList($includeFallbackServer);
         $servers[] = self::getMainMailerConfig();
 
-        $rand = rand(0, count($servers) - 1);
+        if ($ExcludedMailer) {
+            $servers = array_values(array_filter(
+                $servers,
+                static fn(array $server): bool => !self::isSameServer($server, $ExcludedMailer)
+            ));
+        }
+
+        if ($servers === []) {
+            return null;
+        }
+
+        $server = $servers[array_rand($servers)];
 
         try {
-            return self::parseMailServerDataToPhpMailer($servers[$rand]);
+            return self::parseMailServerDataToPhpMailer($server);
         } catch (\Exception $exception) {
             Log::write($exception->getMessage());
         }
@@ -247,12 +263,18 @@ class Mailer
      */
     public static function getRandomFallbackPHPMailer(): ?PHPMailer
     {
-        $servers = self::getFallBackServerList();
-        $rand = rand(0, count($servers) - 1);
+        $servers = array_values(self::getFallBackServerList());
+
+        if ($servers === []) {
+            Log::write('multi-mailer error: no fallback server configured');
+            return null;
+        }
+
+        $server = $servers[array_rand($servers)];
 
         try {
-            return self::parseMailServerDataToPhpMailer($servers[$rand]);
-        } catch (\Exception $exception) {
+            return self::parseMailServerDataToPhpMailer($server);
+        } catch (\Throwable $exception) {
             Log::write($exception->getMessage());
         }
 
@@ -264,7 +286,7 @@ class Mailer
     public static function retryWithNextServer(PHPMailer $PhpMailer): bool
     {
         try {
-            $NewRandom = Mailer::getRandomPHPMailer(true);
+            $NewRandom = Mailer::getRandomPHPMailer(true, $PhpMailer);
 
             if (!$NewRandom) {
                 Log::write('multi-mailer error - retry error: no more servers');
@@ -293,5 +315,19 @@ class Mailer
         }
 
         return false;
+    }
+
+    /**
+     * @param array<string, mixed> $server
+     */
+    private static function isSameServer(array $server, PHPMailer $PhpMailer): bool
+    {
+        $host = empty($server['server']) ? 'localhost' : (string)$server['server'];
+        $port = empty($server['port']) ? 25 : (int)$server['port'];
+        $username = empty($server['username']) ? '' : (string)$server['username'];
+
+        return $host === $PhpMailer->Host
+            && $port === $PhpMailer->Port
+            && $username === $PhpMailer->Username;
     }
 }

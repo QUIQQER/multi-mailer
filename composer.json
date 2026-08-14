@@ -2,19 +2,24 @@
     "name": "quiqqer/multi-mailer",
     "type": "quiqqer-module",
     "description": "Multi Mailer - Reliable mail delivery system with automatic failover",
+    "homepage": "https://www.quiqqer.com",
     "license": "GPL-3.0-or-later",
     "authors": [
         {
-            "name": "Henning Leutz",
-            "email": "leutz@pcsg.de",
-            "homepage": "http://www.pcsg.de",
-            "role": "Developer"
+            "name": "PCSG - Computer & Internet Service OHG",
+            "email": "info@quiqqer.com",
+            "homepage": "https://www.quiqqer.com",
+            "role": "Maintainer"
         }
     ],
     "support": {
-        "email": "support@pcsg.de"
+        "email": "support@pcsg.de",
+        "issues": "https://dev.quiqqer.com/quiqqer/multi-mailer/issues",
+        "source": "https://dev.quiqqer.com/quiqqer/multi-mailer",
+        "url": "https://www.quiqqer.com"
     },
     "require": {
+        "php": "^8.2",
         "quiqqer/core": "^2"
     },
     "autoload": {
@@ -63,6 +68,5 @@
         "dev:init:check-requirements": "Check if the necessary requirements are met",
         "dev:init:tools": "Install all developer tools (requires PHIVE)",
         "dev:init:git-hooks": "Install all git hooks (may require tools to be installed)"
-    },
-    "version": "2.0.1"
+    }
 }

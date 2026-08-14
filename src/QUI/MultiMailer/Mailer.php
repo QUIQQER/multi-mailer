@@ -224,15 +224,28 @@ class Mailer
 
     //region PHPMailer
 
-    public static function getRandomPHPMailer($includeFallbackServer = false): ?PHPMailer
-    {
+    public static function getRandomPHPMailer(
+        bool $includeFallbackServer = false,
+        ?PHPMailer $ExcludedMailer = null
+    ): ?PHPMailer {
         $servers = self::getList($includeFallbackServer);
         $servers[] = self::getMainMailerConfig();
 
-        $rand = rand(0, count($servers) - 1);
+        if ($ExcludedMailer) {
+            $servers = array_values(array_filter(
+                $servers,
+                static fn(array $server): bool => !self::isSameServer($server, $ExcludedMailer)
+            ));
+        }
+
+        if ($servers === []) {
+            return null;
+        }
+
+        $server = $servers[array_rand($servers)];
 
         try {
-            return self::parseMailServerDataToPhpMailer($servers[$rand]);
+            return self::parseMailServerDataToPhpMailer($server);
         } catch (\Exception $exception) {
             Log::write($exception->getMessage());
         }
@@ -247,12 +260,18 @@ class Mailer
      */
     public static function getRandomFallbackPHPMailer(): ?PHPMailer
     {
-        $servers = self::getFallBackServerList();
-        $rand = rand(0, count($servers) - 1);
+        $servers = array_values(self::getFallBackServerList());
+
+        if ($servers === []) {
+            Log::write('multi-mailer error: no fallback server configured');
+            return null;
+        }
+
+        $server = $servers[array_rand($servers)];
 
         try {
-            return self::parseMailServerDataToPhpMailer($servers[$rand]);
-        } catch (\Exception $exception) {
+            return self::parseMailServerDataToPhpMailer($server);
+        } catch (\Throwable $exception) {
             Log::write($exception->getMessage());
         }
 
@@ -264,7 +283,7 @@ class Mailer
     public static function retryWithNextServer(PHPMailer $PhpMailer): bool
     {
         try {
-            $NewRandom = Mailer::getRandomPHPMailer(true);
+            $NewRandom = Mailer::getRandomPHPMailer(true, $PhpMailer);
 
             if (!$NewRandom) {
                 Log::write('multi-mailer error - retry error: no more servers');
@@ -293,5 +312,19 @@ class Mailer
         }
 
         return false;
+    }
+
+    /**
+     * @param array<string, mixed> $server
+     */
+    private static function isSameServer(array $server, PHPMailer $PhpMailer): bool
+    {
+        $host = empty($server['server']) ? 'localhost' : (string)$server['server'];
+        $port = empty($server['port']) ? 25 : (int)$server['port'];
+        $username = empty($server['username']) ? '' : (string)$server['username'];
+
+        return $host === $PhpMailer->Host
+            && $port === $PhpMailer->Port
+            && $username === $PhpMailer->Username;
     }
 }

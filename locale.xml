@@ -6,8 +6,8 @@
             <en><![CDATA[QUIQQER - Multi Mailer]]></en>
         </locale>
         <locale name="package.description">
-            <de><![CDATA[Reliable mail delivery system with automatic failover.]]></de>
-            <en><![CDATA[Zuverlässiges Mailerversand mit automatischer Ausfallsicherung.]]></en>
+            <de><![CDATA[Zuverlässiger Mailversand mit automatischer Ausfallsicherung.]]></de>
+            <en><![CDATA[Reliable mail delivery system with automatic failover.]]></en>
         </locale>
 
         <locale name="window.qui.multi.mailer.title">
@@ -112,11 +112,11 @@
             <en><![CDATA[Require verification of the SSL certificate used]]></en>
         </locale>
         <locale name="template.textSmtpSettingsSecureSSL_verify_peer_name">
-            <de><![CDATA[Erfordere die Verfikation des Peernamens]]></de>
+            <de><![CDATA[Erfordere die Verifikation des Peernamens]]></de>
             <en><![CDATA[Require the specification of the peer name]]></en>
         </locale>
         <locale name="template.textSmtpSettingsSecureSSL_allow_self_signed">
-            <de><![CDATA[Selbst signierte Zerifikate erlauben]]></de>
+            <de><![CDATA[Selbst signierte Zertifikate erlauben]]></de>
             <en><![CDATA[Allow self-signed certificates]]></en>
         </locale>
         <locale name="template.textAuth">
@@ -159,15 +159,15 @@
             ]]></de>
             <en><![CDATA[
             <p>
-            Diese Einstellung definiert, ob der Mail-Server als Fallback-Server fungieren soll.
-            Ein Fallback-Server wird standardmäßig nicht für den Versand von E-Mails verwendet.
-            Er kommt nur dann zum Einsatz, wenn ein Standard-Server einen Fehler zurückmeldet oder der Versand über diesen fehlschlägt.
+            This setting defines whether the mail server acts as a fallback server.
+            A fallback server is not used for regular email delivery.
+            It is used only if a primary server returns an error or sending via that server fails.
             </p>
 
-            <p>Funktionsweise:</p>
+            <p>How it works:</p>
             <ul>
-            <li>Deaktiviert: Der Server wird wie ein normaler Standard-Server verwendet.</li>
-            <li>Aktiviert: Der Server wird nur als Alternative genutzt, wenn ein Versand über die Standard-Server nicht erfolgreich ist.</li>
+            <li>Disabled: The server is used as a regular primary server.</li>
+            <li>Enabled: The server is used only as an alternative if delivery through the primary servers fails.</li>
             </ul>
             ]]></en>
         </locale>

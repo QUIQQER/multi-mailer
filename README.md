@@ -42,4 +42,4 @@ then you are welcome to send an e-mail to support@pcsg.de
 Licence
 -------
 
-GPL-3.0+
+GPL-3.0-or-later

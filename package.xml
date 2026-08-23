@@ -8,6 +8,15 @@
             <locale group="quiqqer/multi-mailer" var="package.description"/>
         </description>
 
+        <capabilities schemaVersion="1">
+            <capability id="communication.email-delivery-failover">
+                <title>Email delivery failover</title>
+                <description>
+                    Provides configurable multi-server SMTP delivery with automatic server selection, retry failover for direct and queued messages, per-server sender and security settings, connection testing, and delivery logging.
+                </description>
+            </capability>
+        </capabilities>
+
         <image src="URL_OPT_DIR/quiqqer/multi-mailer/bin/images/Logo.png"/>
 
         <support>

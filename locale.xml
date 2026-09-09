@@ -4,38 +4,78 @@
         <locale name="package.title">
             <de><![CDATA[QUIQQER - Multi Mailer]]></de>
             <en><![CDATA[QUIQQER - Multi Mailer]]></en>
+            <es><![CDATA[QUIQQER - Multi Mailer]]></es>
+            <pt><![CDATA[QUIQQER - Multi Mailer]]></pt>
+            <fr><![CDATA[QUIQQER - Multi Mailer]]></fr>
+            <it><![CDATA[QUIQQER - Multi Mailer]]></it>
+            <pl><![CDATA[QUIQQER - Multi Mailer]]></pl>
         </locale>
         <locale name="package.description">
             <de><![CDATA[Zuverlässiger Mailversand mit automatischer Ausfallsicherung.]]></de>
             <en><![CDATA[Reliable mail delivery system with automatic failover.]]></en>
+            <es><![CDATA[Envío fiable de correo con cambio automático a un servidor de respaldo en caso de fallo.]]></es>
+            <pt><![CDATA[Envio fiável de e-mail com mudança automática para um servidor alternativo em caso de falha.]]></pt>
+            <fr><![CDATA[Envoi fiable d’e-mails avec basculement automatique vers un serveur de secours.]]></fr>
+            <it><![CDATA[Invio affidabile delle e-mail con passaggio automatico a un server di riserva in caso di errore.]]></it>
+            <pl><![CDATA[Niezawodne wysyłanie e-maili z automatycznym przełączaniem na serwer zapasowy w razie awarii.]]></pl>
         </locale>
 
         <locale name="window.qui.multi.mailer.title">
             <de><![CDATA[Fallback Mailserver]]></de>
             <en><![CDATA[Fallback mail server]]></en>
+            <es><![CDATA[Servidor de correo de respaldo]]></es>
+            <pt><![CDATA[Servidor de correio alternativo]]></pt>
+            <fr><![CDATA[Serveur de messagerie de secours]]></fr>
+            <it><![CDATA[Server di posta di riserva]]></it>
+            <pl><![CDATA[Zapasowy serwer pocztowy]]></pl>
         </locale>
         <locale name="multi-mailer.settings.title">
             <de><![CDATA[Zusätzliche SMTP Mailserver - Fallback Mailserver]]></de>
             <en><![CDATA[Additional SMTP mail servers - Fallback mail server]]></en>
+            <es><![CDATA[Servidores de correo SMTP adicionales - Servidor de respaldo]]></es>
+            <pt><![CDATA[Servidores de correio SMTP adicionais - Servidor alternativo]]></pt>
+            <fr><![CDATA[Serveurs de messagerie SMTP supplémentaires - Serveur de secours]]></fr>
+            <it><![CDATA[Server di posta SMTP aggiuntivi - Server di riserva]]></it>
+            <pl><![CDATA[Dodatkowe serwery pocztowe SMTP - Serwer zapasowy]]></pl>
         </locale>
 
         <locale name="message.mail.test.success">
             <de><![CDATA[Versand wurde erfolgreich durchgeführt]]></de>
-            <en><![CDATA[Shipping was successfully completed]]></en>
+            <en><![CDATA[The email was sent successfully]]></en>
+            <es><![CDATA[El correo se ha enviado correctamente]]></es>
+            <pt><![CDATA[O e-mail foi enviado com sucesso]]></pt>
+            <fr><![CDATA[L’e-mail a été envoyé avec succès]]></fr>
+            <it><![CDATA[E-mail inviata correttamente]]></it>
+            <pl><![CDATA[E-mail został wysłany pomyślnie]]></pl>
         </locale>
         <locale name="mail.test.subject">
             <de><![CDATA[SMTP Mail Test]]></de>
             <en><![CDATA[SMTP mail test]]></en>
+            <es><![CDATA[Prueba de correo SMTP]]></es>
+            <pt><![CDATA[Teste de correio SMTP]]></pt>
+            <fr><![CDATA[Test d’envoi SMTP]]></fr>
+            <it><![CDATA[Test di invio SMTP]]></it>
+            <pl><![CDATA[Test poczty SMTP]]></pl>
         </locale>
         <locale name="mail.test.body" html="true">
             <de><![CDATA[
             <h1>SMTP Test erfolgreich</h1><p>Dies ist ein Test, um die SMTP-Verbindung zu überprüfen.</p>
             ]]></de>
             <en><![CDATA[<h1>SMTP test successful</h1><p>This is a test to check the SMTP connection.</p>]]></en>
+            <es><![CDATA[<h1>Prueba SMTP completada correctamente</h1><p>Este es un mensaje de prueba para comprobar la conexión SMTP.</p>]]></es>
+            <pt><![CDATA[<h1>Teste SMTP concluído com sucesso</h1><p>Esta é uma mensagem de teste para verificar a ligação SMTP.</p>]]></pt>
+            <fr><![CDATA[<h1>Test SMTP réussi</h1><p>Ceci est un message de test permettant de vérifier la connexion SMTP.</p>]]></fr>
+            <it><![CDATA[<h1>Test SMTP riuscito</h1><p>Questo è un messaggio di prova per verificare la connessione SMTP.</p>]]></it>
+            <pl><![CDATA[<h1>Test SMTP zakończony pomyślnie</h1><p>To jest wiadomość testowa służąca do sprawdzenia połączenia SMTP.</p>]]></pl>
         </locale>
         <locale name="mail.test.altBody">
             <de><![CDATA[SMTP Test erfolgreich. Dies ist ein Test, um die SMTP-Verbindung zu überprüfen.]]></de>
             <en><![CDATA[SMTP test successful. This is a test to check the SMTP connection.]]></en>
+            <es><![CDATA[Prueba SMTP completada correctamente. Este es un mensaje de prueba para comprobar la conexión SMTP.]]></es>
+            <pt><![CDATA[Teste SMTP concluído com sucesso. Esta é uma mensagem de teste para verificar a ligação SMTP.]]></pt>
+            <fr><![CDATA[Test SMTP réussi. Ceci est un message de test permettant de vérifier la connexion SMTP.]]></fr>
+            <it><![CDATA[Test SMTP riuscito. Questo è un messaggio di prova per verificare la connessione SMTP.]]></it>
+            <pl><![CDATA[Test SMTP zakończony pomyślnie. To jest wiadomość testowa służąca do sprawdzenia połączenia SMTP.]]></pl>
         </locale>
     </groups>
 
@@ -43,105 +83,230 @@
         <locale name="window.addMailServer.title">
             <de><![CDATA[SMTP Mailserver hinzufügen]]></de>
             <en><![CDATA[Add SMTP mail server]]></en>
+            <es><![CDATA[Añadir servidor de correo SMTP]]></es>
+            <pt><![CDATA[Adicionar servidor de correio SMTP]]></pt>
+            <fr><![CDATA[Ajouter un serveur de messagerie SMTP]]></fr>
+            <it><![CDATA[Aggiungi un server di posta SMTP]]></it>
+            <pl><![CDATA[Dodaj serwer pocztowy SMTP]]></pl>
         </locale>
 
         <locale name="window.removeMailServer.title">
             <de><![CDATA[SMTP Mailserver entfernen]]></de>
             <en><![CDATA[Remove SMTP mail server]]></en>
+            <es><![CDATA[Eliminar servidor de correo SMTP]]></es>
+            <pt><![CDATA[Remover servidor de correio SMTP]]></pt>
+            <fr><![CDATA[Supprimer un serveur de messagerie SMTP]]></fr>
+            <it><![CDATA[Rimuovi un server di posta SMTP]]></it>
+            <pl><![CDATA[Usuń serwer pocztowy SMTP]]></pl>
         </locale>
         <locale name="window.removeMailServer.text">
             <de><![CDATA[Willst du den SMTP-Mailserver wirklich entfernen?]]></de>
             <en><![CDATA[Do you really want to remove the SMTP mail server?]]></en>
+            <es><![CDATA[¿Quieres eliminar este servidor de correo SMTP?]]></es>
+            <pt><![CDATA[Pretende remover este servidor de correio SMTP?]]></pt>
+            <fr><![CDATA[Voulez-vous vraiment supprimer ce serveur de messagerie SMTP ?]]></fr>
+            <it><![CDATA[Vuoi davvero rimuovere questo server di posta SMTP?]]></it>
+            <pl><![CDATA[Czy na pewno chcesz usunąć ten serwer pocztowy SMTP?]]></pl>
         </locale>
         <locale name="window.removeMailServer.information">
             <de><![CDATA[Folgender SMTP Mailserver wird unwiderruflich entfernt:]]></de>
             <en><![CDATA[The following SMTP mail server is irrevocably removed:]]></en>
+            <es><![CDATA[El siguiente servidor de correo SMTP se eliminará de forma irreversible:]]></es>
+            <pt><![CDATA[O seguinte servidor de correio SMTP será removido de forma irreversível:]]></pt>
+            <fr><![CDATA[Le serveur de messagerie SMTP suivant sera supprimé de manière irréversible :]]></fr>
+            <it><![CDATA[Il seguente server di posta SMTP verrà rimosso in modo irreversibile:]]></it>
+            <pl><![CDATA[Następujący serwer pocztowy SMTP zostanie nieodwracalnie usunięty:]]></pl>
         </locale>
         <locale name="window.editMailServer.title">
             <de><![CDATA[SMTP Mailserver bearbeiten]]></de>
             <en><![CDATA[Edit SMTP mail server]]></en>
+            <es><![CDATA[Editar servidor de correo SMTP]]></es>
+            <pt><![CDATA[Editar servidor de correio SMTP]]></pt>
+            <fr><![CDATA[Modifier un serveur de messagerie SMTP]]></fr>
+            <it><![CDATA[Modifica un server di posta SMTP]]></it>
+            <pl><![CDATA[Edytuj serwer pocztowy SMTP]]></pl>
         </locale>
 
         <locale name="template.mailSettings">
             <de><![CDATA[E-Mail Einstellungen]]></de>
             <en><![CDATA[E-mail settings]]></en>
+            <es><![CDATA[Configuración del correo electrónico]]></es>
+            <pt><![CDATA[Definições de e-mail]]></pt>
+            <fr><![CDATA[Paramètres des e-mails]]></fr>
+            <it><![CDATA[Impostazioni e-mail]]></it>
+            <pl><![CDATA[Ustawienia poczty e-mail]]></pl>
         </locale>
         <locale name="template.mailFrom">
             <de><![CDATA[Absender E-Mail-Adresse]]></de>
             <en><![CDATA[Sender e-mail address]]></en>
+            <es><![CDATA[Dirección de correo del remitente]]></es>
+            <pt><![CDATA[Endereço de e-mail do remetente]]></pt>
+            <fr><![CDATA[Adresse e-mail de l’expéditeur]]></fr>
+            <it><![CDATA[Indirizzo e-mail del mittente]]></it>
+            <pl><![CDATA[Adres e-mail nadawcy]]></pl>
         </locale>
         <locale name="template.mailFromText">
             <de><![CDATA[Angezeigter Absendername]]></de>
             <en><![CDATA[Displayed sender name]]></en>
+            <es><![CDATA[Nombre del remitente que se muestra]]></es>
+            <pt><![CDATA[Nome do remetente apresentado]]></pt>
+            <fr><![CDATA[Nom de l’expéditeur affiché]]></fr>
+            <it><![CDATA[Nome del mittente visualizzato]]></it>
+            <pl><![CDATA[Wyświetlana nazwa nadawcy]]></pl>
         </locale>
         <locale name="template.mailReplyTo">
             <de><![CDATA[Antwort E-Mail-Adresse]]></de>
             <en><![CDATA[Reply e-mail address]]></en>
+            <es><![CDATA[Dirección de correo para respuestas]]></es>
+            <pt><![CDATA[Endereço de e-mail para resposta]]></pt>
+            <fr><![CDATA[Adresse e-mail de réponse]]></fr>
+            <it><![CDATA[Indirizzo e-mail per le risposte]]></it>
+            <pl><![CDATA[Adres e-mail do odpowiedzi]]></pl>
         </locale>
         <locale name="template.textSmtpSettings">
             <de><![CDATA[SMTP-Einstellungen]]></de>
             <en><![CDATA[SMTP settings]]></en>
+            <es><![CDATA[Configuración SMTP]]></es>
+            <pt><![CDATA[Definições SMTP]]></pt>
+            <fr><![CDATA[Paramètres SMTP]]></fr>
+            <it><![CDATA[Impostazioni SMTP]]></it>
+            <pl><![CDATA[Ustawienia SMTP]]></pl>
         </locale>
 
         <locale name="template.textSmtpSettingsServer">
             <de><![CDATA[Server]]></de>
             <en><![CDATA[Server]]></en>
+            <es><![CDATA[Servidor]]></es>
+            <pt><![CDATA[Servidor]]></pt>
+            <fr><![CDATA[Serveur]]></fr>
+            <it><![CDATA[Server]]></it>
+            <pl><![CDATA[Serwer]]></pl>
         </locale>
         <locale name="template.textSmtpSettingsPort">
             <de><![CDATA[Port]]></de>
             <en><![CDATA[Port]]></en>
+            <es><![CDATA[Puerto]]></es>
+            <pt><![CDATA[Porta]]></pt>
+            <fr><![CDATA[Port]]></fr>
+            <it><![CDATA[Porta]]></it>
+            <pl><![CDATA[Port]]></pl>
         </locale>
         <locale name="template.textSmtpSettingsDebug">
             <de><![CDATA[SMTP Debug Level]]></de>
             <en><![CDATA[SMTP debug level]]></en>
+            <es><![CDATA[Nivel de depuración SMTP]]></es>
+            <pt><![CDATA[Nível de depuração SMTP]]></pt>
+            <fr><![CDATA[Niveau de débogage SMTP]]></fr>
+            <it><![CDATA[Livello di debug SMTP]]></it>
+            <pl><![CDATA[Poziom debugowania SMTP]]></pl>
         </locale>
         <locale name="template.textSmtpSettingsSecurity">
             <de><![CDATA[Verbindungssicherheit]]></de>
             <en><![CDATA[Connection security]]></en>
+            <es><![CDATA[Seguridad de la conexión]]></es>
+            <pt><![CDATA[Segurança da ligação]]></pt>
+            <fr><![CDATA[Sécurité de la connexion]]></fr>
+            <it><![CDATA[Sicurezza della connessione]]></it>
+            <pl><![CDATA[Bezpieczeństwo połączenia]]></pl>
         </locale>
         <locale name="template.textSmtpSettingsSecuritySSL">
             <de><![CDATA[SSL]]></de>
             <en><![CDATA[SSL]]></en>
+            <es><![CDATA[SSL]]></es>
+            <pt><![CDATA[SSL]]></pt>
+            <fr><![CDATA[SSL]]></fr>
+            <it><![CDATA[SSL]]></it>
+            <pl><![CDATA[SSL]]></pl>
         </locale>
         <locale name="template.textSmtpSettingsSecurityTLS">
             <de><![CDATA[TLS]]></de>
             <en><![CDATA[TLS]]></en>
+            <es><![CDATA[TLS]]></es>
+            <pt><![CDATA[TLS]]></pt>
+            <fr><![CDATA[TLS]]></fr>
+            <it><![CDATA[TLS]]></it>
+            <pl><![CDATA[TLS]]></pl>
         </locale>
         <locale name="template.textSmtpSettingsSecureSSL_verify_peer">
             <de><![CDATA[Verifizierung des verwendeten SSL-Zertifikats voraussetzen]]></de>
             <en><![CDATA[Require verification of the SSL certificate used]]></en>
+            <es><![CDATA[Exigir la verificación del certificado SSL utilizado]]></es>
+            <pt><![CDATA[Exigir a verificação do certificado SSL utilizado]]></pt>
+            <fr><![CDATA[Exiger la vérification du certificat SSL utilisé]]></fr>
+            <it><![CDATA[Richiedi la verifica del certificato SSL utilizzato]]></it>
+            <pl><![CDATA[Wymagaj weryfikacji używanego certyfikatu SSL]]></pl>
         </locale>
         <locale name="template.textSmtpSettingsSecureSSL_verify_peer_name">
             <de><![CDATA[Erfordere die Verifikation des Peernamens]]></de>
-            <en><![CDATA[Require the specification of the peer name]]></en>
+            <en><![CDATA[Require verification of the peer name]]></en>
+            <es><![CDATA[Exigir la verificación del nombre del servidor remoto]]></es>
+            <pt><![CDATA[Exigir a verificação do nome do servidor remoto]]></pt>
+            <fr><![CDATA[Exiger la vérification du nom du serveur distant]]></fr>
+            <it><![CDATA[Richiedi la verifica del nome del server remoto]]></it>
+            <pl><![CDATA[Wymagaj weryfikacji nazwy serwera zdalnego]]></pl>
         </locale>
         <locale name="template.textSmtpSettingsSecureSSL_allow_self_signed">
             <de><![CDATA[Selbst signierte Zertifikate erlauben]]></de>
             <en><![CDATA[Allow self-signed certificates]]></en>
+            <es><![CDATA[Permitir certificados autofirmados]]></es>
+            <pt><![CDATA[Permitir certificados autoassinados]]></pt>
+            <fr><![CDATA[Autoriser les certificats autosignés]]></fr>
+            <it><![CDATA[Consenti i certificati autofirmati]]></it>
+            <pl><![CDATA[Zezwalaj na certyfikaty z podpisem własnym]]></pl>
         </locale>
         <locale name="template.textAuth">
             <de><![CDATA[SMTP-Authentifizierung]]></de>
             <en><![CDATA[SMTP authentication]]></en>
+            <es><![CDATA[Autenticación SMTP]]></es>
+            <pt><![CDATA[Autenticação SMTP]]></pt>
+            <fr><![CDATA[Authentification SMTP]]></fr>
+            <it><![CDATA[Autenticazione SMTP]]></it>
+            <pl><![CDATA[Uwierzytelnianie SMTP]]></pl>
         </locale>
         <locale name="template.textAuthActivate">
             <de><![CDATA[SMTP Authentifizierung aktivieren?]]></de>
             <en><![CDATA[Activate SMTP authentication?]]></en>
+            <es><![CDATA[¿Activar la autenticación SMTP?]]></es>
+            <pt><![CDATA[Ativar a autenticação SMTP?]]></pt>
+            <fr><![CDATA[Activer l’authentification SMTP ?]]></fr>
+            <it><![CDATA[Attivare l’autenticazione SMTP?]]></it>
+            <pl><![CDATA[Włączyć uwierzytelnianie SMTP?]]></pl>
         </locale>
         <locale name="template.textAuthUsername">
             <de><![CDATA[SMTP Benutzer]]></de>
             <en><![CDATA[SMTP user]]></en>
+            <es><![CDATA[Usuario SMTP]]></es>
+            <pt><![CDATA[Utilizador SMTP]]></pt>
+            <fr><![CDATA[Utilisateur SMTP]]></fr>
+            <it><![CDATA[Utente SMTP]]></it>
+            <pl><![CDATA[Użytkownik SMTP]]></pl>
         </locale>
         <locale name="template.textAuthPassword">
             <de><![CDATA[SMTP Passwort]]></de>
             <en><![CDATA[SMTP password]]></en>
+            <es><![CDATA[Contraseña SMTP]]></es>
+            <pt><![CDATA[Palavra-passe SMTP]]></pt>
+            <fr><![CDATA[Mot de passe SMTP]]></fr>
+            <it><![CDATA[Password SMTP]]></it>
+            <pl><![CDATA[Hasło SMTP]]></pl>
         </locale>
         <locale name="template.textTestButton">
             <de><![CDATA[SMTP Mail Server Einstellungen testen]]></de>
             <en><![CDATA[Test SMTP mail server settings]]></en>
+            <es><![CDATA[Probar la configuración del servidor de correo SMTP]]></es>
+            <pt><![CDATA[Testar as definições do servidor de correio SMTP]]></pt>
+            <fr><![CDATA[Tester les paramètres du serveur de messagerie SMTP]]></fr>
+            <it><![CDATA[Verifica le impostazioni del server di posta SMTP]]></it>
+            <pl><![CDATA[Sprawdź ustawienia serwera pocztowego SMTP]]></pl>
         </locale>
         <locale name="template.textIsFallbackServer">
             <de><![CDATA[Ist Fallback-Server]]></de>
             <en><![CDATA[Is fallback server]]></en>
+            <es><![CDATA[Usar como servidor de respaldo]]></es>
+            <pt><![CDATA[Usar como servidor alternativo]]></pt>
+            <fr><![CDATA[Utiliser comme serveur de secours]]></fr>
+            <it><![CDATA[Usa come server di riserva]]></it>
+            <pl><![CDATA[Używaj jako serwera zapasowego]]></pl>
         </locale>
         <locale name="template.textIsFallbackServer.description" html="true">
             <de><![CDATA[
@@ -170,6 +335,11 @@
             <li>Enabled: The server is used only as an alternative if delivery through the primary servers fails.</li>
             </ul>
             ]]></en>
+            <es><![CDATA[<p>Esta opción determina si el servidor de correo actúa como servidor de respaldo. Un servidor de respaldo no se utiliza para el envío habitual de correo. Solo se utiliza cuando un servidor principal devuelve un error o falla el envío a través de él.</p><p>Funcionamiento:</p><ul><li>Desactivada: el servidor se utiliza como un servidor principal normal.</li><li>Activada: el servidor solo se utiliza como alternativa si falla el envío a través de los servidores principales.</li></ul>]]></es>
+            <pt><![CDATA[<p>Esta definição determina se o servidor de correio funciona como servidor alternativo. Um servidor alternativo não é utilizado para o envio habitual de e-mails. Só é utilizado quando um servidor principal devolve um erro ou o envio através desse servidor falha.</p><p>Funcionamento:</p><ul><li>Desativada: o servidor é utilizado como um servidor principal normal.</li><li>Ativada: o servidor só é utilizado como alternativa se o envio através dos servidores principais falhar.</li></ul>]]></pt>
+            <fr><![CDATA[<p>Ce paramètre définit si le serveur de messagerie sert de serveur de secours. Un serveur de secours n’est pas utilisé pour l’envoi habituel d’e-mails. Il n’intervient que si un serveur principal renvoie une erreur ou si l’envoi via ce serveur échoue.</p><p>Fonctionnement :</p><ul><li>Désactivé : le serveur est utilisé comme un serveur principal ordinaire.</li><li>Activé : le serveur n’est utilisé comme solution de secours que si l’envoi via les serveurs principaux échoue.</li></ul>]]></fr>
+            <it><![CDATA[<p>Questa impostazione determina se il server di posta funge da server di riserva. Un server di riserva non viene utilizzato per l’invio ordinario delle e-mail. Entra in funzione solo quando un server principale restituisce un errore o l’invio tramite quel server non riesce.</p><p>Funzionamento:</p><ul><li>Disattivata: il server viene utilizzato come un normale server principale.</li><li>Attivata: il server viene utilizzato come alternativa solo se l’invio tramite i server principali non riesce.</li></ul>]]></it>
+            <pl><![CDATA[<p>To ustawienie określa, czy serwer pocztowy pełni rolę serwera zapasowego. Serwer zapasowy nie jest używany do zwykłego wysyłania e-maili. Jest wykorzystywany tylko wtedy, gdy serwer główny zwróci błąd lub wysyłanie za jego pośrednictwem się nie powiedzie.</p><p>Zasada działania:</p><ul><li>Wyłączone: serwer jest używany jako zwykły serwer główny.</li><li>Włączone: serwer jest używany jako zapasowy tylko wtedy, gdy wysyłanie za pośrednictwem serwerów głównych się nie powiedzie.</li></ul>]]></pl>
         </locale>
 
     </groups>
